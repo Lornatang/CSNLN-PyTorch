@@ -1,35 +1,36 @@
-# RCAN-PyTorch
+# CSNLN-PyTorch
 
 ### Overview
 
-This repository contains an op-for-op PyTorch reimplementation of [Image Super-Resolution Using Very Deep Residual Channel Attention Networks](https://arxiv.org/abs/1807.02758).
+This repository contains an op-for-op PyTorch reimplementation
+of [Image Super-Resolution with Cross-Scale Non-Local Attention and Exhaustive Self-Exemplars Mining](https://arxiv.org/abs/2006.01424v1).
 
 ### Table of contents
 
-- [RCAN-PyTorch](#rcan-pytorch)
+- [CSNLN-PyTorch](#csnln-pytorch)
     - [Overview](#overview)
     - [Table of contents](#table-of-contents)
-    - [About Image Super-Resolution Using Very Deep Residual Channel Attention Networks](#about-image-super-resolution-using-very-deep-residual-channel-attention-networks)
+    - [About Image Super-Resolution Using Very Deep Residual Channel Attention Networks](#about-image-super-resolution-with-cross-scale-non-local-attention-and-exhaustive-self-exemplars-mining)
     - [Download weights](#download-weights)
     - [Download datasets](#download-datasets)
     - [Test](#test)
     - [Train](#train)
     - [Result](#result)
     - [Credit](#credit)
-        - [Image Super-Resolution Using Very Deep Residual Channel Attention Networks](#image-super-resolution-using-very-deep-residual-channel-attention-networks)
+        - [Image Super-Resolution with Cross-Scale Non-Local Attention and Exhaustive Self-Exemplars Mining](#image-super-resolution-with-cross-scale-non-local-attention-and-exhaustive-self-exemplars-mining)
 
-## About Image Super-Resolution Using Very Deep Residual Channel Attention Networks
+## About Image Super-Resolution with Cross-Scale Non-Local Attention and Exhaustive Self-Exemplars Mining
 
-If you're new to RCAN, here's an abstract straight from the paper:
+If you're new to CSNLN, here's an abstract straight from the paper:
 
-Convolutional neural network (CNN) depth is of crucial importance for image super-resolution (SR). However, we observe that deeper networks for image
-SR are more difficult to train. The lowresolution inputs and features contain abundant low-frequency information, which is treated equally across
-channels, hence hindering the representational ability of CNNs. To solve these problems, we propose the very deep residual channel attention
-networks (RCAN). Specifically, we propose a residual in residual (RIR) structure to form very deep network, which consists of several residual groups
-with long skip connections. Each residual group contains some residual blocks with short skip connections. Meanwhile, RIR allows abundant
-low-frequency information to be bypassed through multiple skip connections, making the main network focus on learning high-frequency information.
-Furthermore, we propose a channel attention mechanism to adaptively rescale channel-wise features by considering interdependencies among channels.
-Extensive experiments show that our RCAN achieves better accuracy and visual improvements against state-of-the-art methods.
+Deep convolution-based single image super-resolution (SISR) networks embrace the benefits of learning from large-scale external image resources for
+local recovery, yet most existing works have ignored the long-range feature-wise similarities in natural images. Some recent works have successfully
+leveraged this intrinsic feature correlation by exploring non-local attention modules. However, none of the current deep models have studied another
+inherent property of images: cross-scale feature correlation. In this paper, we propose the first Cross-Scale Non-Local (CS-NL) attention module with
+integration into a recurrent neural network. By combining the new CS-NL prior with local and in-scale non-local priors in a powerful recurrent fusion
+cell, we can find more cross-scale feature correlations within a single low-resolution (LR) image. The performance of SISR is significantly improved
+by exhaustively integrating all possible priors. Extensive experiments demonstrate the effectiveness of the proposed CS-NL module by setting new
+state-of-the-arts on multiple SISR benchmarks.
 
 ## Download weights
 
@@ -49,7 +50,7 @@ Modify the contents of the file as follows.
 
 - line 29: `upscale_factor` change to the magnification you need to enlarge.
 - line 31: `mode` change Set to valid mode.
-- line 70: `model_path` change weight address after training.
+- line 69: `model_path` change weight address after training.
 
 ## Train
 
@@ -71,52 +72,44 @@ Source of original paper results: https://arxiv.org/pdf/1807.02758.pdf
 
 In the following table, the value in `()` indicates the result of the project, and `-` indicates no test.
 
-| Dataset | Scale |       PSNR       |
-|:-------:|:-----:|:----------------:|
-|  Set5   |   2   | 38.27(**38.09**) |
-|  Set5   |   3   | 34.74(**34.56**) |
-|  Set5   |   4   | 32.63(**32.41**) |
-|  Set5   |   8   | 27.31(**26.97**) |
+| Dataset | Scale |     PSNR     |
+|:-------:|:-----:|:------------:|
+|  Set5   |   2   | 38.28(**-**) |
+|  Set5   |   3   | 34.74(**-**) |
+|  Set5   |   4   | 32.68(**-**) |
 
 Low Resolution / Super Resolution / High Resolution
 <span align="center"><img src="assets/result.png"/></span>
 
 ### Credit
 
-#### Image Super-Resolution Using Very Deep Residual Channel Attention Networks
+#### Image Super-Resolution with Cross-Scale Non-Local Attention and Exhaustive Self-Exemplars Mining
 
-_Yulun Zhang, Kunpeng Li, Kai Li, Lichen Wang, Bineng Zhong, Yun Fu_ <br>
+_Yiqun Mei, Yuchen Fan, Yuqian Zhou, Lichao Huang, Thomas S. Huang, Humphrey Shi_ <br>
 
 **Abstract** <br>
-Convolutional neural network (CNN) depth is of crucial importance for image super-resolution (SR). However, we observe that deeper networks for image
-SR are more difficult to train. The low-resolution inputs and features contain abundant low-frequency information, which is treated equally across
-channels, hence hindering the representational ability of CNNs. To solve these problems, we propose the very deep residual channel attention
-networks (RCAN). Specifically, we propose a residual in residual (RIR) structure to form very deep network, which consists of several residual groups
-with long skip connections. Each residual group contains some residual blocks with short skip connections. Meanwhile, RIR allows abundant
-low-frequency information to be bypassed through multiple skip connections, making the main network focus on learning high-frequency information.
-Furthermore, we propose a channel attention mechanism to adaptively rescale channel-wise features by considering interdependencies among channels.
-Extensive experiments show that our RCAN achieves better accuracy and visual improvements against state-of-the-art methods.
+Deep convolution-based single image super-resolution (SISR) networks embrace the benefits of learning from large-scale external image resources for
+local recovery, yet most existing works have ignored the long-range feature-wise similarities in natural images. Some recent works have successfully
+leveraged this intrinsic feature correlation by exploring non-local attention modules. However, none of the current deep models have studied another
+inherent property of images: cross-scale feature correlation. In this paper, we propose the first Cross-Scale Non-Local (CS-NL) attention module with
+integration into a recurrent neural network. By combining the new CS-NL prior with local and in-scale non-local priors in a powerful recurrent fusion
+cell, we can find more cross-scale feature correlations within a single low-resolution (LR) image. The performance of SISR is significantly improved
+by exhaustively integrating all possible priors. Extensive experiments demonstrate the effectiveness of the proposed CS-NL module by setting new
+state-of-the-arts on multiple SISR benchmarks.
 
-[[Code]](https://github.com/yulunzhang/RCAN) [[Paper]](https://arxiv.org/pdf/1807.02758)
+[[Code(PyTorch)]](https://github.com/yulunzhang/RCAN) [[Paper]](https://arxiv.org/pdf/2006.01424v1)
 
 ```
-@article{DBLP:journals/corr/abs-1807-02758,
-  author    = {Yulun Zhang and
-               Kunpeng Li and
-               Kai Li and
-               Lichen Wang and
-               Bineng Zhong and
-               Yun Fu},
-  title     = {Image Super-Resolution Using Very Deep Residual Channel Attention
-               Networks},
-  journal   = {CoRR},
-  volume    = {abs/1807.02758},
-  year      = {2018},
-  url       = {http://arxiv.org/abs/1807.02758},
-  eprinttype = {arXiv},
-  eprint    = {1807.02758},
-  timestamp = {Tue, 20 Nov 2018 12:24:39 +0100},
-  biburl    = {https://dblp.org/rec/journals/corr/abs-1807-02758.bib},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
+@inproceedings{Mei2020image,
+  title={Image Super-Resolution with Cross-Scale Non-Local Attention and Exhaustive Self-Exemplars Mining},
+  author={Mei, Yiqun and Fan, Yuchen and Zhou, Yuqian and Huang, Lichao and Huang, Thomas S and Shi, Humphrey},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2020}
+@InProceedings{Lim_2017_CVPR_Workshops,
+  author = {Lim, Bee and Son, Sanghyun and Kim, Heewon and Nah, Seungjun and Lee, Kyoung Mu},
+  title = {Enhanced Deep Residual Networks for Single Image Super-Resolution},
+  booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  month = {July},
+  year = {2017}
 }
 ```
