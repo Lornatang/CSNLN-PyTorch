@@ -270,24 +270,24 @@ class SelfExemplarMining(nn.Module):
             nn.PReLU(),
         )
         # X4
-        # self.down_conv3 = nn.Sequential(
-        #     nn.Conv2d(channels, channels, (8, 8), (4, 4), (2, 2)),
-        #     nn.PReLU(),
-        # )
-        # self.down_conv4 = nn.Sequential(
-        #     nn.Conv2d(channels, channels, (8, 8), (4, 4), (2, 2)),
-        #     nn.PReLU(),
-        # )
+        self.down_conv3 = nn.Sequential(
+            nn.Conv2d(channels, channels, (8, 8), (4, 4), (2, 2)),
+            nn.PReLU(),
+        )
+        self.down_conv4 = nn.Sequential(
+            nn.Conv2d(channels, channels, (8, 8), (4, 4), (2, 2)),
+            nn.PReLU(),
+        )
 
         self.diff_encode1 = nn.Sequential(
             nn.ConvTranspose2d(channels, channels, (stride_kernel_size, stride_kernel_size), (stride, stride), (padding, padding)),
             nn.PReLU(),
         )
         # X4
-        # self.diff_encode2 = nn.Sequential(
-        #     nn.ConvTranspose2d(channels, channels, (8, 8), (4, 4), (2, 2)),
-        #     nn.PReLU(),
-        # )
+        self.diff_encode2 = nn.Sequential(
+            nn.ConvTranspose2d(channels, channels, (8, 8), (4, 4), (2, 2)),
+            nn.PReLU(),
+        )
 
         self.conv = nn.Sequential(
             nn.Conv2d(channels, channels, (kernel_size, kernel_size), (1, 1), (kernel_size // 2, kernel_size // 2)),
@@ -350,9 +350,3 @@ class CSNLN(nn.Module):
         out = out.div_(255.).add_(self.mean)
 
         return out
-
-
-if __name__ == '__main__':
-    model = CSNLN(2)
-    for k, v in model.state_dict().items():
-        print(k)
