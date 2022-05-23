@@ -14,5 +14,5 @@
 import os
 
 # Prepare dataset
-os.system("python ./prepare_dataset.py --images_dir ../data/DIV2K/original/DIV2K_train_HR --output_dir ../data/DIV2K/CSNLN/train --image_size 224 --step 112 --num_workers 16")
-os.system("python ./prepare_dataset.py --images_dir ../data/DIV2K/original/DIV2K_valid_HR --output_dir ../data/DIV2K/CSNLN/valid --image_size 224 --step 224 --num_workers 16")
+os.system("python ./prepare_dataset.py --images_dir ../data/DIV2K/original/DIV2K_train_HR --output_dir ../data/DIV2K/CSNLN/train --image_size 450 --step 225 --num_workers 16")
+os.system("python ./prepare_dataset.py --images_dir ../data/DIV2K/original/DIV2K_valid_HR --output_dir ../data/DIV2K/CSNLN/valid --image_size 250 --step 250 --num_workers 16")
