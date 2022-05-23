@@ -49,14 +49,14 @@ if mode == "train":
     resume = ""
 
     # Total num epochs
-    epochs = 50
+    epochs = 258
 
     # Adam optimizer parameter
     model_lr = 1e-4
     model_betas = (0.9, 0.999)
 
     # Dynamically adjust the learning rate policy
-    lr_scheduler_step_size = 15
+    lr_scheduler_step_size = epochs // 3
     lr_scheduler_gamma = 0.5
 
     # How many iterations to print the training result
