@@ -13,8 +13,10 @@ of [Image Super-Resolution with Cross-Scale Non-Local Attention and Exhaustive S
     - [About Image Super-Resolution Using Very Deep Residual Channel Attention Networks](#about-image-super-resolution-with-cross-scale-non-local-attention-and-exhaustive-self-exemplars-mining)
     - [Download weights](#download-weights)
     - [Download datasets](#download-datasets)
-    - [Test](#test)
-    - [Train](#train)
+    - [How Test and Train](#how-test-and-train)
+        - [Test](#test)
+        - [Train model](#train-model)
+        - [Resume train model](#resume-train-model)
     - [Result](#result)
     - [Credit](#credit)
         - [Image Super-Resolution with Cross-Scale Non-Local Attention and Exhaustive Self-Exemplars Mining](#image-super-resolution-with-cross-scale-non-local-attention-and-exhaustive-self-exemplars-mining)
@@ -44,27 +46,28 @@ Contains DIV2K, DIV8K, Flickr2K, OST, T91, Set5, Set14, BSDS100 and BSDS200, etc
 - [Google Driver](https://drive.google.com/drive/folders/1A6lzGeQrFMxPqJehK9s37ce-tPDj20mD?usp=sharing)
 - [Baidu Driver](https://pan.baidu.com/s/1o-8Ty_7q6DiS3ykLU09IVg?pwd=llot)
 
-## Test
+## How Test and Train
 
-Modify the contents of the file as follows.
+Both training and testing only need to modify the `config.py` file. 
 
-- line 29: `upscale_factor` change to the magnification you need to enlarge.
-- line 31: `mode` change Set to valid mode.
-- line 69: `model_path` change weight address after training.
+### Test
 
-## Train
+- line 31: `upscale_factor` change to `2`.
+- line 33: `mode` change to `valid`.
+- line 71: `model_path` change to `results/pretrained_models/CSNLN_x2-DIV2K-xxxxxxxx.pth.tar`.
 
-Modify the contents of the file as follows.
+### Train model
 
-- line 29: `upscale_factor` change to the magnification you need to enlarge.
-- line 31: `mode` change Set to train mode.
+- line 31: `upscale_factor` change to `2`.
+- line 33: `mode` change to `train`.
+- line 35: `exp_name` change to `CSNLN_x2`.
 
-If you want to load weights that you've trained before, modify the contents of the file as follows.
+### Resume train model
 
-### Resume model
-
-- line 47: `start_epoch` change number of model training iterations in the previous round.
-- line 48: `resume` change to SRResNet model address that needs to be loaded.
+- line 31: `upscale_factor` change to `2`.
+- line 33: `mode` change to `train`.
+- line 35: `exp_name` change to `CSNLN_x2`.
+- line 49: `resume` change to `samples/CSNLN_x2/epoch_xxx.pth.tar`.
 
 ## Result
 
@@ -72,12 +75,12 @@ Source of original paper results: https://arxiv.org/pdf/1807.02758.pdf
 
 In the following table, the value in `()` indicates the result of the project, and `-` indicates no test.
 
-| Dataset | Scale |     PSNR     |
-|:-------:|:-----:|:------------:|
-|  Set5   |   2   | 38.28(**-**) |
-|  Set5   |   3   | 34.74(**-**) |
-|  Set5   |   4   | 32.68(**-**) |
-
+| Method | Scale |      Set5 (PSNR/SSIM)      |      Set14(PSNR/SSIM)      |     BSD100(PSNR/SSIM)      |     Urban100(PSNR/SSIM)     |    Manga109(PSNR/SSIM)     |
+|:------:|:-----:|:--------------------------:|:--------------------------:|:--------------------------:|:---------------------------:|:--------------------------:|
+|  DRLN  |   2   | 38.28(**-**)/0.9616(**-**) | 34.12(**-**)/0.9223(**-**) | 32.40(**-**)/0.9024(**-**) | 33.25(**-**)/0.9386(**-**)  | 39.37(**-**)/0.9785(**-**) |
+|  DRLN  |   3   | 34.74(**-**)/0.9300(**-**) | 30.66(**-**)/0.8482(**-**) | 29.33(**-**)/0.8105(**-**) | 29.13(**-**)/0.8712(**-**)  | 34.45(**-**)/0.9502(**-**) |
+|  DRLN  |   4   | 32.68(**-**)/0.9004(**-**) | 28.95(**-**)/0.7888(**-**) | 27.80(**-**)/0.7439(**-**) | 27.22(**-**)/0.8168(**-**)  | 31.43(**-**)/0.9201(**-**) |
+         
 Low Resolution / Super Resolution / High Resolution
 <span align="center"><img src="assets/result.png"/></span>
 
