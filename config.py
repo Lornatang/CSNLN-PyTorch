@@ -25,6 +25,8 @@ np.random.seed(0)
 device = torch.device("cuda", 0)
 # Turning on when the image size does not change during training can speed up training
 cudnn.benchmark = True
+# When evaluating the performance of the SR model, whether to verify only the Y channel image data
+only_test_y_channel = True
 # Image magnification factor
 upscale_factor = 2
 # Current configuration parameter method
@@ -44,7 +46,6 @@ if mode == "train":
     num_workers = 4
 
     # Incremental training and migration training
-    start_epoch = 0
     resume = ""
 
     # Total num epochs
@@ -54,11 +55,12 @@ if mode == "train":
     model_lr = 1e-4
     model_betas = (0.9, 0.999)
 
-    # StepLR scheduler parameter
+    # Dynamically adjust the learning rate policy
     lr_scheduler_step_size = 15
     lr_scheduler_gamma = 0.5
 
-    print_frequency = 100
+    # How many iterations to print the training result
+    print_frequency = 200
 
 if mode == "valid":
     # Test data address
@@ -66,4 +68,4 @@ if mode == "valid":
     sr_dir = f"results/test/{exp_name}"
     hr_dir = f"data/Set5/GTmod12"
 
-    model_path = f"results/{exp_name}/best.pth.tar"
+    model_path = "results/pretrained_models/CSNLN_x2-DIV2K-xxxxxxxx.pth.tar"
