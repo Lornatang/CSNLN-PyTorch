@@ -176,7 +176,11 @@ def define_loss() -> nn.L1Loss:
 
 
 def define_optimizer(model) -> optim.Adam:
-    optimizer = optim.Adam(model.parameters(), lr=config.model_lr, betas=config.model_betas)
+    optimizer = optim.Adam(model.parameters(), 
+                           config.model_lr, 
+                           config.model_betas,
+                           config.model_eps,
+                           config.model_weight_decay)
 
     return optimizer
 
