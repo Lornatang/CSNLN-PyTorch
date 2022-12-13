@@ -54,6 +54,8 @@ if mode == "train":
     # Adam optimizer parameter
     model_lr = 1e-4
     model_betas = (0.9, 0.999)
+    model_eps = 1e-4
+    model_weight_decay = 0.0
 
     # Dynamically adjust the learning rate policy
     lr_scheduler_step_size = epochs // 3
